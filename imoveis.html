@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imóveis — Pátio Imóveis</title>
+  <meta name="description" content="Casas, apartamentos e coberturas para comprar ou alugar. (Site de estudo, marca fictícia.)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topo container">
+    <a class="logo" href="index.html">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="logo-quadro" x="2" y="2" width="28" height="28" rx="7"/><rect class="logo-miolo" x="11" y="11" width="10" height="10" rx="2"/></svg>
+      Pátio
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a class="atual" href="imoveis.html">Imóveis</a>
+      <a href="index.html#bairros">Bairros</a>
+      <a href="index.html#anunciar">Anunciar</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="botao botao-escuro botao-pequeno" href="#contato">Fale com um corretor</a>
+  </header>
+
+  <main class="pagina container">
+    <nav class="trilha" aria-label="Você está em"><a href="index.html">Início</a> / Imóveis</nav>
+    <h1 id="titulo-lista">Imóveis à venda</h1>
+    <p class="subtitulo" id="contagem" aria-live="polite"></p>
+
+    <!-- FILTROS (o js/site.js liga os botões e redesenha a lista) -->
+    <div class="barra-filtros">
+      <div class="filtros-esquerda">
+        <div class="alternador" role="group" aria-label="Tipo de negócio">
+          <button type="button" data-modo="comprar" aria-pressed="true">Comprar</button>
+          <button type="button" data-modo="alugar" aria-pressed="false">Alugar</button>
+        </div>
+        <div class="tipos" role="group" aria-label="Tipo de imóvel">
+          <button type="button" data-tipo="Todos" aria-pressed="true">Todos</button>
+          <button type="button" data-tipo="Apartamento" aria-pressed="false">Apartamento</button>
+          <button type="button" data-tipo="Casa" aria-pressed="false">Casa</button>
+          <button type="button" data-tipo="Cobertura" aria-pressed="false">Cobertura</button>
+        </div>
+      </div>
+      <div class="ordenar">
+        <label for="ordem">Ordenar por</label>
+        <select id="ordem">
+          <option value="menor">Menor preço</option>
+          <option value="maior">Maior preço</option>
+          <option value="area">Maior área</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="resultado">
+      <div class="resultado-lista">
+        <div class="grade-imoveis" id="lista"></div>
+        <div class="vazio" id="vazio" hidden>
+          <strong>Nenhum imóvel com esses filtros.</strong>
+          <span>Tente outro tipo de imóvel ou troque entre comprar e alugar.</span>
+        </div>
+      </div>
+
+      <!-- Mapa provisório: num site real, aqui entra Google Maps, Mapbox ou Leaflet -->
+      <aside class="mapa" aria-label="Mapa">
+        <svg viewBox="0 0 320 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M-10 120L330 60"/><path d="M-10 300L330 250"/><path d="M-10 450L330 430"/><path d="M70 -10L110 530"/><path d="M230 -10L210 530"/><path d="M110 280L210 150" stroke-width="6"/></svg>
+        <i style="left:28%;top:22%"></i><i style="left:62%;top:40%"></i><i style="left:40%;top:60%"></i>
+        <div class="mapa-aviso">
+          <strong>Espaço para o mapa</strong>
+          <span>No site real, aqui entra um mapa interativo com os imóveis da busca.</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="rodape" id="contato">
+    <div class="container rodape-simples">
+      <span class="logo">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect class="logo-quadro" x="2" y="2" width="28" height="28" rx="7"/><rect class="logo-miolo" x="11" y="11" width="10" height="10" rx="2"/></svg>
+        Pátio
+      </span>
+      <span>[TELEFONE / WHATSAPP] · [E-MAIL]</span>
+      <small>© 2026 Pátio Imóveis · CRECI [NÚMERO]</small>
+    </div>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>

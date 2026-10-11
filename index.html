@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pátio Imóveis — casas e apartamentos para comprar e alugar</title>
+  <meta name="description" content="Imobiliária de bairro: casas e apartamentos escolhidos por quem conhece cada rua. (Site de estudo, marca fictícia.)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <header class="topo container">
+    <a class="logo" href="index.html">
+      <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="logo-quadro" x="2" y="2" width="28" height="28" rx="7"/><rect class="logo-miolo" x="11" y="11" width="10" height="10" rx="2"/></svg>
+      Pátio
+    </a>
+    <nav class="menu" aria-label="Principal">
+      <a href="imoveis.html?modo=comprar">Comprar</a>
+      <a href="imoveis.html?modo=alugar">Alugar</a>
+      <a href="#bairros">Bairros</a>
+      <a href="#anunciar">Anunciar</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="botao botao-escuro botao-pequeno" href="#contato">Fale com um corretor</a>
+  </header>
+
+  <main>
+    <!-- ABERTURA + BUSCA -->
+    <section class="hero container">
+      <div class="hero-grade">
+        <div class="hero-texto">
+          <div class="hero-topo">
+            <span class="selo">Imobiliária de bairro · [SUA CIDADE]</span>
+            <h1>Encontre o lugar onde a sua <em>rotina</em> cabe.</h1>
+            <p>Casas e apartamentos escolhidos por quem conhece cada rua. Você visita só o que faz sentido para a sua vida.</p>
+          </div>
+          <div class="hero-acoes">
+            <a class="botao botao-destaque" href="imoveis.html">Ver imóveis
+              <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="botao botao-contorno-claro" href="#anunciar">Anunciar meu imóvel</a>
+          </div>
+        </div>
+
+        <!-- Foto provisória: troque este bloco por <img src="img/capa.jpg" alt="..."> -->
+        <div class="foto hero-foto">
+          <svg class="arte" viewBox="0 0 400 240" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><path d="M0 222h400"/><path d="M60 222V122h120"/><path d="M40 122h140"/><path d="M180 222V82h140v140"/><path d="M165 82h170"/><path d="M82 222v-78h76v78M120 144v78"/><rect x="205" y="104" width="90" height="44"/><path d="M250 104v44"/><path d="M362 222v-58"/><path d="M362 112c-18 14-18 40 0 54 18-14 18-40 0-54z"/></svg>
+          <div class="hero-cartao">
+            <small>Destaque da semana</small>
+            <strong>Casa contemporânea em condomínio</strong>
+            <span>Alto da Serra</span>
+            <a href="imovel.html">Ver detalhes</a>
+          </div>
+          <span class="legenda-foto">Espaço para foto de capa</span>
+        </div>
+      </div>
+
+      <!-- O formulário envia as escolhas para imoveis.html pelo endereço (método GET) -->
+      <form class="busca" id="busca" action="imoveis.html" method="get">
+        <input type="hidden" name="modo" value="comprar">
+        <div class="alternador" role="group" aria-label="Tipo de negócio">
+          <button type="button" data-modo="comprar" aria-pressed="true">Comprar</button>
+          <button type="button" data-modo="alugar" aria-pressed="false">Alugar</button>
+        </div>
+        <div class="busca-campos">
+          <div class="campo largo">
+            <label for="q-local">Cidade ou bairro</label>
+            <input id="q-local" name="local" type="text" placeholder="Ex.: Centro">
+          </div>
+          <div class="campo">
+            <label for="q-tipo">Tipo de imóvel</label>
+            <select id="q-tipo" name="tipo">
+              <option>Todos</option><option>Apartamento</option><option>Casa</option><option>Cobertura</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="q-quartos">Quartos</label>
+            <select id="q-quartos" name="quartos">
+              <option>Qualquer</option><option>1 ou mais</option><option>2 ou mais</option><option>3 ou mais</option><option>4 ou mais</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="q-valor">Valor até</label>
+            <select id="q-valor" name="valor"><option>Sem limite</option></select>
+          </div>
+          <button class="botao botao-destaque" type="submit">
+            <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            Buscar imóveis
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- IMÓVEIS EM DESTAQUE (os cartões são montados pelo js/site.js) -->
+    <section class="secao container">
+      <div class="cabecalho-secao">
+        <div>
+          <h2>Imóveis em destaque</h2>
+          <p class="subtitulo">Uma seleção curta, revisada toda semana pela nossa equipe.</p>
+        </div>
+        <a class="link-seta" href="imoveis.html">Ver todos os imóveis
+          <svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="grade-imoveis" id="destaques"></div>
+    </section>
+
+    <!-- BAIRROS -->
+    <section class="faixa-escura" id="bairros">
+      <div class="container">
+        <h2>Explore por bairro</h2>
+        <p class="subtitulo">Antes do imóvel, vem o entorno. Comece pelo jeito de viver que você procura.</p>
+        <div class="grade-bairros">
+          <div class="bairro">
+            <div><h3>Centro</h3><p>Tudo a pé: comércio, serviços e transporte.</p></div>
+            <a href="imoveis.html">Ver imóveis no Centro</a>
+          </div>
+          <div class="bairro">
+            <div><h3>Jardim das Acácias</h3><p>Ruas arborizadas e casas com quintal.</p></div>
+            <a href="imoveis.html">Ver imóveis no Jardim</a>
+          </div>
+          <div class="bairro">
+            <div><h3>Vila Aurora</h3><p>Prédios novos com vida de bairro.</p></div>
+            <a href="imoveis.html">Ver imóveis na Vila</a>
+          </div>
+          <div class="bairro">
+            <div><h3>Alto da Serra</h3><p>Vista aberta e condomínios fechados.</p></div>
+            <a href="imoveis.html">Ver imóveis no Alto</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="secao container">
+      <h2>Do primeiro clique à entrega das chaves</h2>
+      <div class="grade-passos">
+        <div class="passo">
+          <span class="numero">1</span>
+          <h3>Conte o que você procura</h3>
+          <p>Bairro, orçamento e o que não pode faltar. Um corretor responde com opções que cabem no seu filtro.</p>
+        </div>
+        <div class="passo">
+          <span class="numero">2</span>
+          <h3>Visite sem perder tempo</h3>
+          <p>Agende pelo site ou pelo WhatsApp e veja vários imóveis no mesmo dia, com roteiro organizado.</p>
+        </div>
+        <div class="passo">
+          <span class="numero">3</span>
+          <h3>Feche com segurança</h3>
+          <p>Cuidamos da documentação, da negociação e do contrato até o dia de pegar as chaves.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMADA PARA ANUNCIAR -->
+    <section class="secao container" id="anunciar">
+      <div class="cta">
+        <div>
+          <h2>Quer vender ou alugar o seu imóvel?</h2>
+          <p>Fazemos a avaliação, as fotos e a divulgação. Você acompanha cada visita e cada proposta.</p>
+        </div>
+        <div class="cta-acoes">
+          <a class="botao botao-escuro" href="#contato">Anunciar meu imóvel</a>
+          <a class="botao botao-contorno" href="#contato">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape" id="contato">
+    <div class="container">
+      <div class="rodape-colunas">
+        <div class="rodape-marca">
+          <span class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="logo-quadro" x="2" y="2" width="28" height="28" rx="7"/><rect class="logo-miolo" x="11" y="11" width="10" height="10" rx="2"/></svg>
+            Pátio
+          </span>
+          <p>Imóveis para morar bem, no bairro certo. Marca fictícia criada para estudo.</p>
+        </div>
+        <div class="rodape-coluna">
+          <strong>Imóveis</strong>
+          <a href="imoveis.html?modo=comprar">Comprar</a>
+          <a href="imoveis.html?modo=alugar">Alugar</a>
+          <a href="#anunciar">Anunciar</a>
+        </div>
+        <div class="rodape-coluna">
+          <strong>Empresa</strong>
+          <a href="#">Sobre nós</a>
+          <a href="#">Corretores</a>
+          <a href="#">Blog</a>
+        </div>
+        <div class="rodape-coluna">
+          <strong>Contato</strong>
+          <span>[TELEFONE / WHATSAPP]</span>
+          <span>[E-MAIL]</span>
+          <span>[ENDEREÇO DO ESCRITÓRIO]</span>
+        </div>
+      </div>
+      <div class="rodape-base">
+        <span>© 2026 Pátio Imóveis · CRECI [NÚMERO]</span>
+        <a href="#">Política de privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/dados.js"></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
