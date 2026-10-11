@@ -371,3 +371,87 @@ h2 { font-size: clamp(30px, 3.2vw, 44px); line-height: 1.1; }
   .simulador, .contato { padding: 24px 20px; }
   .mapa { height: 320px; }
 }
+
+/* 6) ANIMAÇÕES
+   Tudo aqui fica dentro de "prefers-reduced-motion: no-preference":
+   quem pediu ao sistema para reduzir movimento vê o site parado. */
+@media (prefers-reduced-motion: no-preference) {
+
+  html { scroll-behavior: smooth; }
+
+  /* -- Movimentos reutilizáveis -- */
+  @keyframes subir   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @keyframes surgir  { from { opacity: 0; transform: scale(.97); }      to { opacity: 1; transform: none; } }
+  @keyframes tracar  { to { stroke-dashoffset: 0; } }
+  @keyframes pulsar  { 0% { transform: scale(1); } 40% { transform: scale(1.35); } 100% { transform: scale(1); } }
+  @keyframes onda    { 0% { box-shadow: 0 0 0 0 rgba(15,43,40,.45); } 100% { box-shadow: 0 0 0 18px rgba(15,43,40,0); } }
+
+  /* -- Entrada da abertura (roda uma vez, ao carregar a página) -- */
+  .hero-topo > *, .hero-acoes { animation: subir .7s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-topo > :nth-child(1) { animation-delay: .05s; }
+  .hero-topo > :nth-child(2) { animation-delay: .15s; }
+  .hero-topo > :nth-child(3) { animation-delay: .28s; }
+  .hero-acoes                { animation-delay: .4s; }
+  .hero-foto                 { animation: surgir .8s cubic-bezier(.2,.7,.2,1) .1s both; }
+  .hero-cartao               { animation: subir .6s cubic-bezier(.2,.7,.2,1) .9s both; }
+  .busca                     { animation: subir .7s cubic-bezier(.2,.7,.2,1) .5s both; }
+  .pagina > .trilha, .pagina > h1, .pagina > .subtitulo, .imovel-topo, .galeria { animation: subir .6s cubic-bezier(.2,.7,.2,1) both; }
+  .pagina > h1, .imovel-topo { animation-delay: .08s; }
+  .pagina > .subtitulo, .galeria { animation-delay: .16s; }
+
+  /* -- Desenho que se traça sozinho (o JS marca o SVG com .desenhar) -- */
+  .arte.desenhar > * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracar 1.1s ease-out forwards; }
+
+  /* -- Cartões da lista: entram em sequência a cada filtro -- */
+  #lista .cartao { animation: subir .45s cubic-bezier(.2,.7,.2,1) both; }
+  #lista .cartao:nth-child(2) { animation-delay: .06s; }
+  #lista .cartao:nth-child(3) { animation-delay: .12s; }
+  #lista .cartao:nth-child(4) { animation-delay: .18s; }
+  #lista .cartao:nth-child(5) { animation-delay: .24s; }
+  #lista .cartao:nth-child(n+6) { animation-delay: .3s; }
+
+  /* -- Cartão: levanta e ganha sombra quando o mouse passa -- */
+  .cartao { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .cartao:hover { transform: translateY(-6px); box-shadow: 0 18px 36px -18px rgba(15,43,40,.35); border-color: var(--borda-campo); }
+  .cartao .arte { transition: transform .5s cubic-bezier(.2,.7,.2,1); transform-origin: 50% 100%; }
+  .cartao:hover .arte { transform: scale(1.05); }
+
+  /* -- Botões e links -- */
+  .botao { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, filter .18s ease; }
+  .botao:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px rgba(15,43,40,.5); }
+  .botao:active { transform: scale(.97); box-shadow: none; }
+  .botao svg, .link-seta svg { transition: transform .2s ease; }
+  .botao:hover svg, .link-seta:hover svg { transform: translateX(4px); }
+  .alternador button, .tipos button { transition: background-color .2s ease, color .2s ease, transform .15s ease; }
+  .alternador button:active, .tipos button:active { transform: scale(.96); }
+
+  .menu a { background: linear-gradient(currentColor, currentColor) 0 calc(100% - 6px) / 0 2px no-repeat; transition: background-size .25s ease; }
+  .menu a:hover { background-size: 100% 2px; }
+
+  .bairro { transition: transform .25s ease, border-color .25s ease, background-color .25s ease; }
+  .bairro:hover { transform: translateY(-4px); border-color: var(--destaque); background: rgba(255,255,255,.04); }
+  .passo .numero { transition: transform .3s cubic-bezier(.3,1.6,.5,1); }
+  .passo:hover .numero { transform: scale(1.12) rotate(-6deg); }
+
+  .campo input, .campo select, .campo textarea { transition: border-color .2s ease, box-shadow .2s ease; }
+  .campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--tinta); box-shadow: 0 0 0 4px rgba(212,240,79,.6); }
+
+  /* -- Favorito: o coração pula ao ser clicado -- */
+  .favorito { transition: transform .15s ease; }
+  .favorito:hover { transform: scale(1.08); }
+  .favorito.pulsar svg { animation: pulsar .35s ease; }
+
+  /* -- Detalhes das outras páginas -- */
+  .mapa i { animation: onda 2s ease-out infinite; }
+  .mapa i:nth-of-type(2) { animation-delay: .6s; }
+  .mapa i:nth-of-type(3) { animation-delay: 1.2s; }
+  .confirmacao:not([hidden]) { animation: subir .45s cubic-bezier(.2,.7,.2,1) both; }
+  .galeria-menores .foto { transition: transform .25s ease; }
+  .galeria-menores .foto:hover { transform: scale(1.02); }
+
+  /* -- Revelar ao rolar: o JS põe .revelar e depois .visivel.
+        Fica por último para valer sobre as transições de "hover" acima;
+        o JS retira as duas classes quando a entrada termina. -- */
+  .revelar { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+  .revelar.visivel { opacity: 1; transform: none; }
+}
