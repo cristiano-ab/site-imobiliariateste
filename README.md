@@ -17,6 +17,7 @@ Baixe os arquivos e abra `index.html` no navegador. Só isso.
 | `css/style.css` | Todo o visual. As cores ficam nas variáveis do topo (`:root`) |
 | `js/dados.js` | A lista de imóveis e a função que monta o cartão de cada um |
 | `js/site.js` | O comportamento: busca, filtros, favoritos, simulador, formulário |
+| `js/animacoes.js` | Quando as animações acontecem (o visual delas fica na seção 6 do CSS) |
 
 ## O que é de exemplo
 

@@ -116,6 +116,32 @@ if (simulador) {
   const taxa = simulador.querySelector('#sim-taxa');
   const reais = (valor) => valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
 
+  // Faz o número "correr" do valor antigo até o novo, em vez de trocar de uma vez
+  const campoParcela = simulador.querySelector('#sim-parcela');
+  const semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let parcelaAtual = null;
+  let animacao = null;
+
+  function mostrarParcela(nova) {
+    cancelAnimationFrame(animacao);
+    if (parcelaAtual === null || semMovimento) {
+      parcelaAtual = nova;
+      campoParcela.textContent = reais(nova);
+      return;
+    }
+    const inicial = parcelaAtual;
+    const comeco = performance.now();
+    const duracao = 350; // milissegundos
+    function passo(agora) {
+      const progresso = Math.min((agora - comeco) / duracao, 1);
+      const suave = 1 - Math.pow(1 - progresso, 3); // desacelera no final
+      parcelaAtual = inicial + (nova - inicial) * suave;
+      campoParcela.textContent = reais(parcelaAtual);
+      if (progresso < 1) animacao = requestAnimationFrame(passo);
+    }
+    animacao = requestAnimationFrame(passo);
+  }
+
   function calcular() {
     const valorEntrada = PRECO * Number(entrada.value) / 100;
     const financiado = PRECO - valorEntrada;
@@ -129,7 +155,7 @@ if (simulador) {
 
     simulador.querySelector('#sim-entrada-valor').textContent = entrada.value + '% · ' + reais(valorEntrada);
     simulador.querySelector('#sim-prazo-valor').textContent = prazo.value + ' anos';
-    simulador.querySelector('#sim-parcela').textContent = reais(parcela);
+    mostrarParcela(parcela);
     simulador.querySelector('#sim-financiado').textContent = reais(financiado);
   }
 
